@@ -1,14 +1,14 @@
 export const ApiConfig = {
     adminLogin: {
-        url: "admin/login",
+        url: "v1/admin/login",
         method: "post"
     },
     addActivity: {
-        url: "admin/activity/add",
+        url: "v1/admin/activity/add",
         method: "post"
     },
     activityList: {
-        url: "admin/activity/list",
+        url: "v1/admin/activity/list",
         method: "post"
     },
 }

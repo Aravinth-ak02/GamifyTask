@@ -23,8 +23,8 @@ app.use((req, res, next) => {
     next()
 });
 
-app.use('/admin', admin);
-app.use('/user', user);
+app.use('/v1/admin', admin);
+app.use('/v1/user', user);
 app.use('/admin',express.static(path.join(__dirname,"dist/admin")));
 app.get("/admin/*",(req,res)=>{
     return res.sendFile(path.join(__dirname,"dist/admin","index.html"));

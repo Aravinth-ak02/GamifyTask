@@ -1,34 +1,34 @@
 export const ApiConfig ={
     userRegister:{
         method:"post",
-        url:"user/register"
+        url:"v1/user/register"
     },
     userLogin:{
         method:"post",
-        url:"user/login"
+        url:"v1/user/login"
     },
     leaderboardList:{
         method:"post",
-        url:"user/leaderboard"
+        url:"v1/user/leaderboard"
     },
     newActivitiesList:{
         method:"post",
-        url:"user/new-activities"
+        url:"v1/user/new-activities"
     },
     activityComplete:{
         method:"post",
-        url:"user/activity/complete"
+        url:"v1/user/activity/complete"
     },
     myActivityList:{
         method:"post",
-        url:"user/my-activity/list"
+        url:"v1/user/my-activity/list"
     },
     userActivityList:{
         method:"post",
-        url:"user/activity/list"
+        url:"v1/user/activity/list"
     },
     userDetailsGet:{
         method:"get",
-        url:"user/details/get"
+        url:"v1/user/details/get"
     },
 }
