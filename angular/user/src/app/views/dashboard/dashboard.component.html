@@ -1,0 +1,121 @@
+<div class="activity-header" *ngIf="userDetails && userDetails.user_id">
+    <button type="button" routerLink="/" (click)="changePage('leaderboard')" class="btn btn-info">Leaderbord</button>
+    <button type="button" routerLink="/new-activity" (click)="changePage('new-activity')" class="btn btn-secondary">New
+        Activity</button>
+    <button type="button" routerLink="/my-activity" (click)="changePage('my-activity')" class="btn btn-primary">My
+        Activity</button>
+</div>
+<section class="table-section" *ngIf="page_type === 'leaderboard'">
+    <div class="actv-header">
+        <h4>Leaderboard</h4>
+        <input placeholder="Datepicker" [bsValue]="date_value" class="form-control date-picker"
+            [bsConfig]="{ minMode:'month', adaptivePosition: true, dateInputFormat: 'MMMM YYYY' }" #dp="bsDatepicker"
+            (bsValueChange)="changeDate($event)" bsDatepicker>
+    </div>
+    <table>
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Points</th>
+        </tr>
+        <h6 class="no-list" *ngIf="activityList.length === 0">No User Found</h6>
+        <tr *ngFor="let leaderboard of activityList;let i =index">
+            <td>{{i+skip+1}}</td>
+            <td>
+                <a href="/my-activity" *ngIf="leaderboard?.user_id === userDetails?.user_id">You</a>
+                <a href="/activity/{{leaderboard.user_id}}"
+                    *ngIf="leaderboard?.user_id != userDetails?.user_id">{{leaderboard.username}}</a>
+            </td>
+            <td>{{leaderboard.points}}</td>
+        </tr>
+    </table>
+    <div class="pagination-footer" *ngIf="totalCount >limit">
+        <pagination [totalItems]="totalCount" [itemsPerPage]="limit" [(ngModel)]="current_page"
+            (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+</section>
+
+<section class="table-section" *ngIf="page_type === 'new-activity'">
+    <div class="actv-header">
+        <h4>New Activity</h4>
+    </div>
+    <table>
+        <tr>
+            <th>S.No</th>
+            <th>Activity Name</th>
+            <th>Points</th>
+            <th>Complete Activity</th>
+        </tr>
+        <h6 class="no-list" *ngIf="activityList.length === 0">No Activities Found</h6>
+        <tr *ngFor="let activity of activityList;let i =index">
+            <td>{{i+skip+1}}</td>
+            <td>{{activity.name}}</td>
+            <td>{{activity.points}}</td>
+            <td>
+                <button type="button" class="btn btn-success" (click)="completeActivity(activity._id)">Complete</button>
+            </td>
+        </tr>
+    </table>
+    <div class="pagination-footer" *ngIf="totalCount >limit">
+        <pagination [totalItems]="totalCount" [itemsPerPage]="limit" [(ngModel)]="current_page"
+            (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+</section>
+
+<section class="table-section" *ngIf="page_type === 'my-activity'">
+    <div class="actv-header">
+        <h4>My Activity</h4>
+        <h5>{{date_value ? (date_value | date :"MMMM") : (currentDate | date:"MMMM")}}'s Points:{{monthPoints ? monthPoints : 0}}</h5>
+        <input placeholder="Datepicker" [bsValue]="date_value" class="form-control date-picker"
+            [bsConfig]="{ minMode:'month', adaptivePosition: true, dateInputFormat: 'MMMM YYYY' }" #dp="bsDatepicker"
+            (bsValueChange)="changeDate($event)" bsDatepicker>
+    </div>
+    <table>
+        <tr>
+            <th>S.No</th>
+            <th>Activity Name</th>
+            <th>Points</th>
+            <th>Completed At</th>
+        </tr>
+        <h6 class="no-list" *ngIf="activityList.length === 0">No Activities Found</h6>
+        <tr *ngFor="let activity of activityList;let i =index">
+            <td>{{i+skip+1}}</td>
+            <td>{{activity.activity_name}}</td>
+            <td>{{activity.points}}</td>
+            <td>{{activity.createdAt | date :"dd MMM YYYY HH:mm"}}</td>
+        </tr>
+    </table>
+    <div class="pagination-footer" *ngIf="totalCount >limit">
+        <pagination [totalItems]="totalCount" [itemsPerPage]="limit" [(ngModel)]="current_page"
+            (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+</section>
+<section class="table-section" *ngIf="page_type === 'activity'">
+    <div class="actv-header">
+        <h4>{{user_details && user_details.name ? user_details.name+"'s" : ''}} Activity</h4>
+        <h5>Overall Points:{{user_details && user_details.overall_points ? user_details.overall_points : 0}}</h5>
+        <h5>{{date_value ? (date_value | date :"MMMM") : (currentDate | date:"MMMM")}}'s Points:{{monthPoints ? monthPoints : 0}}</h5>
+        <input placeholder="Datepicker" [bsValue]="date_value" class="form-control date-picker"
+            [bsConfig]="{ minMode:'month', adaptivePosition: true, dateInputFormat: 'MMMM YYYY' }" #dp="bsDatepicker"
+            (bsValueChange)="changeDate($event)" bsDatepicker>
+    </div>
+    <table>
+        <tr>
+            <th>S.No</th>
+            <th>Activity Name</th>
+            <th>Points</th>
+            <th>Completed At</th>
+        </tr>
+        <h6 class="no-list" *ngIf="activityList.length === 0">No Activities Found</h6>
+        <tr *ngFor="let activity of activityList;let i =index">
+            <td>{{i+skip+1}}</td>
+            <td>{{activity.activity_name}}</td>
+            <td>{{activity.points}}</td>
+            <td>{{activity.createdAt | date :"dd MMM YYYY HH:mm"}}</td>
+        </tr>
+    </table>
+    <div class="pagination-footer" *ngIf="totalCount >limit">
+        <pagination [totalItems]="totalCount" [itemsPerPage]="limit" [(ngModel)]="current_page"
+            (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+</section>

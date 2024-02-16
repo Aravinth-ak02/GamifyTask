@@ -1,0 +1,35 @@
+<div>
+    <form class="modal-content animate" #loginForm="ngForm"
+        (ngSubmit)="loginSubmit(loginForm)">
+        <div class="imgcontainer">
+            <h5>Login to {{environment.title | titlecase}}</h5>
+        </div>
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" ngModel #username="ngModel" required>
+            <div class="validation-error" *ngIf="loginForm.submitted && username.errors">
+                <label *ngIf="username.errors['required']">Username is required</label>
+            </div>
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" name="password" ngModel
+                #password="ngModel" required>
+            <div class="validation-error" *ngIf="loginForm.submitted && password.errors">
+                <label *ngIf="password.errors['required']">Password is required</label>
+                <label *ngIf="password.errors['pattern']">
+                    Password must be in minimum eight characters, at least one uppercase letter, one lowercase letter,
+                    one number and one special character
+                </label>
+            </div>
+            <button type="submit">Login</button>
+            <label>
+                <button routerLink="/auth/register" class="reg-btn" type="button">Register</button>
+                <!-- <input type="checkbox" checked="checked" name="remember"> Remember me -->
+            </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+
+        </div>
+    </form>
+</div>

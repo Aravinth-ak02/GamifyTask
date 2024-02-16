@@ -1,0 +1,92 @@
+<div id="id01" class="">
+
+    <form *ngIf="loginpage === 'login'" class="modal-content animate" #loginForm="ngForm"
+        (ngSubmit)="loginSubmit(loginForm)">
+        <div class="imgcontainer">
+            <h5>Login to {{environment.title | titlecase}}</h5>
+        </div>
+        <div class="container">
+            <label for="uname"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email"
+                pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" ngModel #email="ngModel" required>
+            <div class="validation-error" *ngIf="loginForm.submitted && email.errors">
+                <label *ngIf="email.errors['required']">Email is required</label>
+                <label *ngIf="email.errors['pattern']">Invalid Email</label>
+            </div>
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" name="password" ngModel
+                #password="ngModel" required>
+            <div class="validation-error" *ngIf="loginForm.submitted && password.errors">
+                <label *ngIf="password.errors['required']">Password is required</label>
+                <label *ngIf="password.errors['pattern']">
+                    Password must be in minimum eight characters, at least one uppercase letter, one lowercase letter,
+                    one number and one special character
+                </label>
+            </div>
+            <button type="submit">Login</button>
+            <label>
+                <a routerLink="/auth/register"  type="button">Register</a>
+                <!-- <input type="checkbox" checked="checked" name="remember"> Remember me -->
+            </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+
+        </div>
+    </form>
+    <form *ngIf="loginpage === 'register'" class="modal-content animate" #registerForm="ngForm"
+        (ngSubmit)="registerSubmit(registerForm)">
+        <div class="imgcontainer">
+            <h5>Register to {{environment.title | titlecase}}</h5>
+        </div>
+        <div class="container">
+            <label for="uname"><b>Name</b></label>
+            <input type="text" placeholder="Enter Name" name="name" ngModel #name="ngModel" required>
+            <div class="validation-error" *ngIf="registerForm.submitted && name.errors">
+                <label *ngIf="name.errors['required']">Name is required</label>
+            </div>
+            <label for="uname"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email"
+                pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" ngModel #email="ngModel" required>
+            <div class="validation-error" *ngIf="registerForm.submitted && email.errors">
+                <label *ngIf="email.errors['required']">Email is required</label>
+                <label *ngIf="email.errors['pattern']">Invalid Email</label>
+            </div>
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" name="password" ngModel
+                #password="ngModel" required>
+            <div class="validation-error" *ngIf="registerForm.submitted && password.errors">
+                <label *ngIf="password.errors['required']">Password is required</label>
+                <label *ngIf="password.errors['pattern']">
+                    Password must be in minimum eight characters, at least one uppercase letter, one lowercase letter,
+                    one number and one special character
+                </label>
+            </div>
+            <label for="psw"><b>Confirm Password</b></label>
+            <input type="password" placeholder="Enter Confirm Password"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" name="confirm_password"
+                ngModel #confirm_password="ngModel" required>
+            <div class="validation-error" *ngIf="registerForm.submitted && confirm_password.errors">
+                <label *ngIf="confirm_password.errors['required']">Confirm Password is required</label>
+                <label *ngIf="!confirm_password.errors['required'] && confirm_password.errors['pattern']">
+                    Confirm Password must be in minimum eight characters, at least one uppercase letter, one lowercase
+                    letter, one number and one special character
+                </label>
+                <label *ngIf="!confirm_password.errors['required'] && !confirm_password.errors['pattern'] && confirm_password.value != password.value">
+                    Password and Confirm password not matched
+                </label>
+            </div>
+            <button type="submit">Register</button>
+            <label>
+                <a  routerLink="/auth/login" type="button">Go to Login</a>
+                <!-- <input type="checkbox" checked="checked" name="remember"> Remember me -->
+            </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+
+        </div>
+    </form>
+</div>

@@ -1,0 +1,65 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+
+.actv-header{
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 45px;
+}
+
+.validation-error{
+  color: rgb(229, 53, 53);
+  font-size: 12px;
+}
+
+.footer{
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.form-container label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.form-container {
+  margin-top: 13px;
+}
+
+.pagination-footer{
+  display: grid;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.activity-header{
+  padding: 1%;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 1%;
+}
+
+.date-picker{
+  width: 150px;
+}
+
+.no-list{
+  width: 100%;
+  margin-left: 114%;
+  margin-top: 8%;
+}

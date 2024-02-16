@@ -1,0 +1,62 @@
+<section class="table-section">
+    <div class="actv-header">
+        <h4>Activities List</h4>
+        <input placeholder="Datepicker" [bsValue]="date_value" class="form-control date-picker"
+            [bsConfig]="{ minMode:'month', adaptivePosition: true, dateInputFormat: 'MMMM YYYY' }" #dp="bsDatepicker"
+            (bsValueChange)="changeDate($event)" bsDatepicker>
+        <button type="button" (click)="openModal(template)" class="btn btn-success">Add Activity</button>
+    </div>
+    <table>
+        <tr>
+            <th>S.No</th>
+            <th>Activity Name</th>
+            <th>Points</th>
+            <th>Completed Counts</th>
+            <th>Created At</th>
+        </tr>
+        <h6 class="no-list" *ngIf="activityList.length === 0">No Activities Found</h6>
+        <tr *ngFor="let activity of activityList;let i = index">
+            <td>{{i+skip+1}}</td>
+            <td>{{activity.name}}</td>
+            <td>{{activity.points}}</td>
+            <td>{{activity.completed_count}}</td>
+            <td>{{activity.createdAt | date:"dd MMM YYYY HH:mm"}}</td>
+        </tr>
+    </table>
+    <div class="pagination-footer">
+        <pagination [totalItems]="totalCount" [itemsPerPage]="limit" [(ngModel)]="current_page" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+</section>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Add Activity</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #activityForm="ngForm" (ngSubmit)="submitForm(activityForm)">
+            <div class="form-container">
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Enter activity name" ngModel #name="ngModel"
+                    name="name" required>
+                <div class="validation-error" *ngIf="activityForm.submitted && name.errors">
+                    <label *ngIf="name.errors['required']">Name is required</label>
+                </div>
+            </div>
+            <div class="form-container">
+                <label>Points</label>
+                <input type="number" class="form-control" placeholder="Enter points" ngModel #points="ngModel"
+                    name="points" required>
+                <div class="validation-error" *ngIf="activityForm.submitted && points.errors">
+                    <label *ngIf="points.errors['required']">Points is required</label>
+                </div>
+            </div>
+            <div class="footer">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="button" (click)="modalRef?.hide()" class="btn btn-danger">Cancel</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
