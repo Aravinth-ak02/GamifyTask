@@ -6,5 +6,5 @@ Node Version :18.17.1
 
 For admin login credentials:
 1.Call the given url to create admin credential (http://localhost:8000/v1/admin/register) using get method.
-2.Admin username:Admin
+2.Admin username:Admin,
   Admin password:Admin@123
